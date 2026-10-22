@@ -1,46 +1,34 @@
-"""On-policy training. Change the source import to use another AMR problem."""
+"""Select a case and model; train all cases with one shared loop."""
 
+import argparse
 import csv
-from datetime import datetime
 from pathlib import Path
 
 import numpy as np
 import torch
-from torch.distributions import Categorical
 
+from advection_bump import AdvectionBump
+from fem_workers import FEMWorkers
 from model import IPN
 from static_bump import StaticBump
 
 
-# Training
-EPISODES = 20_000
-BATCH_SIZE = 64
-SEED = 0
-GAMMA = 0.99
-EPSILON_START = 0.5
-EPSILON_END = 0.05
-EPSILON_DECAY_EPISODES = 500
-SOURCE_CLASS = StaticBump
+CASES = {"bumps": StaticBump, "advection": AdvectionBump}
+CASE = "advection"
 MODEL_CLASS = IPN
 
-# Optimizer
-OPTIMIZER_CLASS = torch.optim.Adam
-OPTIMIZER_KWARGS = {"lr": 1e-4, "betas": (0.9, 0.999), "eps": 1e-8,
-                    "weight_decay": 0.0}
-
-# Runtime and output
+EPISODES = 20_000
+BATCH_SIZE = 128
+SEED = 0
 DEVICE = "cuda"
-TORCH_CPU_THREADS = 2 # PyTorch threads, not FEM workers.
+TORCH_CPU_THREADS = 2  # PyTorch threads, not FEM workers.
+NUM_WORKERS = 16  # Independent FEM processes.
 PRINT_EVERY = 100
+
 OUTPUT_ROOT = Path(__file__).resolve().parent / "data"
 HISTORY_FILE = "history.csv"
 CHECKPOINT_FILE = "checkpoint.pt"
 PLOT_FILE = "training.png"
-
-
-def true_reward(previous_error, current_error, initial_error):
-    return (previous_error - current_error) / initial_error
-
 
 
 def plot_history(path):
@@ -64,101 +52,108 @@ def plot_history(path):
     figure.savefig(Path(path).with_name(PLOT_FILE), dpi=180)
     plt.close(figure)
 
-def train(episodes=EPISODES, batch_size=BATCH_SIZE, seed=SEED, output=None,
-          source_type=SOURCE_CLASS):
-    if episodes < 1 or batch_size < 1:
-        raise ValueError("episodes and batch_size must be positive")
+def train(case=CASE, episodes=EPISODES, batch_size=BATCH_SIZE, seed=SEED, output=None,
+          num_workers=NUM_WORKERS,
+          model_type=MODEL_CLASS, device=DEVICE):
+    # Setup before the training loop.
     torch.manual_seed(seed)
     torch.set_num_threads(TORCH_CPU_THREADS)
-    device = torch.device(DEVICE)
-    if device.type == "cuda" and not torch.cuda.is_available():
-        raise RuntimeError("CUDA PyTorch is required; activate your GPU-enabled pinn environment")
-    policy = MODEL_CLASS().to(device)
-    optimizer = OPTIMIZER_CLASS(policy.parameters(), **OPTIMIZER_KWARGS)
-    source = source_type()
-    output = Path(output) if output is not None else (
-        OUTPUT_ROOT / datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-    )
+    policy = model_type().to(device)
+    optimizer = policy.make_optimizer()
+    learning = policy.training_settings()
+    source_type = CASES[case]
+    wave_size = num_workers or 1
+    output = Path(output or OUTPUT_ROOT / f"{case}_{model_type.__name__}")
     output.mkdir(parents=True, exist_ok=False)
-    device_name = torch.cuda.get_device_name(device) if device.type == "cuda" else "CPU"
-    print(f"device={device} ({device_name}) episodes={episodes} "
-          f"batch_size={batch_size} seed={seed} optimizer={OPTIMIZER_CLASS.__name__} "
-          f"lr={OPTIMIZER_KWARGS['lr']}", flush=True)
+    print(f"case={case} model={model_type.__name__} device={device} episodes={episodes} "
+          f"batch_size={batch_size} seed={seed} optimizer={learning['optimizer_name']} "
+          f"lr={learning['learning_rate']} num_workers={num_workers}", flush=True)
     print(f"Output: {output}", flush=True)
-    losses = []
 
-    with (output / HISTORY_FILE).open("w", newline="") as file:
+    def save_checkpoint(completed):
+        temporary = output / (CHECKPOINT_FILE + ".tmp")
+        torch.save({
+            "model": policy.state_dict(), "optimizer": optimizer.state_dict(),
+            "episodes": completed, "target_episodes": episodes,
+            "seed": seed, "batch_size": batch_size, "num_workers": num_workers,
+            **learning, "device": str(device), "model_class": model_type.__name__,
+            "source": source_type.__module__, "environment": environment,
+            "torch_version": str(torch.__version__), "numpy_version": np.__version__,
+        }, temporary)
+        temporary.replace(output / CHECKPOINT_FILE)
+
+    with FEMWorkers(source_type, num_workers) as sources, \
+            (output / HISTORY_FILE).open("w", newline="") as file:
+        environment = sources.settings.copy()
         history = csv.writer(file)
         history.writerow(["episode", "initial_error", "final_error", "reward", "policy_loss"])
-        for episode in range(episodes):
-            state = source.reset(seed + episode)
-            initial_error = previous_error = state["error"]
-            log_probabilities, rewards = [], []
-            epsilon = EPSILON_START + (EPSILON_END - EPSILON_START) * min(
-                episode / EPSILON_DECAY_EPISODES, 1.0)
-            done = False
-            while not done:
-                observation = torch.as_tensor(state["observation"], device=device)
-                valid = torch.as_tensor(state["valid_actions"], device=device)
-                logits = policy(observation, valid)
-                # Sample and differentiate the same exploration-mixture policy.
-                probabilities = (1 - epsilon) * logits.softmax(dim=0)
-                probabilities = probabilities + epsilon * valid / valid.sum()
-                distribution = Categorical(probs=probabilities)
-                action = distribution.sample()
-                state, done = source.step(action.item())
-                rewards.append(true_reward(previous_error, state["error"], initial_error))
-                previous_error = state["error"]
-                log_probabilities.append(distribution.log_prob(action))
+        for batch_start in range(0, episodes, batch_size):
+            batch_end = min(batch_start + batch_size, episodes)
+            losses = []
+            # Finish this exact training batch before dispatching any next-policy episodes.
+            for wave_start in range(batch_start, batch_end, wave_size):
+                wave_end = min(wave_start + wave_size, batch_end)
+                states = sources.reset([seed + episode for episode in range(wave_start, wave_end)])
+                initial = {slot: state["error"] for slot, state in states.items()}
+                previous = initial.copy()
+                log_probabilities = {slot: [] for slot in states}
+                rewards = {slot: [] for slot in states}
+                active = list(states)
+                while active:
+                    actions, log_probs = {}, {}
+                    for slot in active:
+                        state = states[slot]
+                        observation = torch.as_tensor(state["observation"], device=device)
+                        valid = torch.as_tensor(state["valid_actions"], device=device)
+                        actions[slot], log_probs[slot] = policy.select_action(
+                            observation, valid, wave_start + slot)
+                    results = sources.step(actions)
+                    next_active = []
+                    for slot in active:
+                        state, done = results[slot]
+                        states[slot] = state
+                        rewards[slot].append(policy.true_reward(previous[slot], state["error"], initial[slot]))
+                        previous[slot] = state["error"]
+                        log_probabilities[slot].append(log_probs[slot])
+                        if not done:
+                            next_active.append(slot)
+                    active = next_active
 
-            discounted, future = [], 0.0
-            for reward in reversed(rewards):
-                future = reward + GAMMA * future
-                discounted.append(future)
-            weights = torch.tensor([GAMMA ** t * value
-                                    for t, value in enumerate(discounted[::-1])],
-                                   dtype=torch.float32, device=device)
-            episode_loss = -(torch.stack(log_probabilities) * weights).sum()
-            losses.append(episode_loss)
-            episode_reward = sum(rewards)
-            history.writerow([episode + 1, initial_error, state["error"],
-                              episode_reward, episode_loss.item()])
-            file.flush()
+                for slot, state in states.items():
+                    episode = wave_start + slot
+                    episode_loss = policy.episode_loss(log_probabilities[slot], rewards[slot])
+                    losses.append(episode_loss)
+                    episode_reward = sum(rewards[slot])
+                    history.writerow([episode + 1, initial[slot], state["error"],
+                                      episode_reward, episode_loss.item()])
+                    file.flush()
+                    if (episode + 1) % PRINT_EVERY == 0 or episode + 1 == episodes:
+                        print(f"episode={episode + 1}/{episodes} error={state['error']:.6e} "
+                              f"reward={episode_reward:.6f} "
+                              f"loss={episode_loss.item():.6f}", flush=True)
 
-            if len(losses) == batch_size or episode + 1 == episodes:
-                loss = torch.stack(losses).mean()
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
-                losses.clear()
+            loss = torch.stack(losses).mean()
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            save_checkpoint(batch_end)
 
-            if (episode + 1) % PRINT_EVERY == 0 or episode + 1 == episodes:
-                print(f"episode={episode + 1}/{episodes} error={state['error']:.6e} "
-                      f"reward={episode_reward:.6f} "
-                      f"loss={episode_loss.item():.6f}", flush=True)
-
-    torch.save({
-        "model": policy.state_dict(),
-        "optimizer": optimizer.state_dict(),
-        "episodes": episodes,
-        "seed": seed,
-        "batch_size": batch_size,
-        "gamma": GAMMA,
-        "learning_rate": OPTIMIZER_KWARGS["lr"],
-        "optimizer_name": OPTIMIZER_CLASS.__name__,
-        "optimizer_settings": OPTIMIZER_KWARGS.copy(),
-        "device": str(device),
-        "exploration": {"start": EPSILON_START, "end": EPSILON_END,
-                        "decay_episodes": EPSILON_DECAY_EPISODES},
-        "source": source_type.__module__,
-        "environment": source.settings,
-        "torch_version": str(torch.__version__),
-        "numpy_version": np.__version__,
-    }, output / CHECKPOINT_FILE)
     plot_history(output / HISTORY_FILE)
     print(f"Saved to {output}", flush=True)
     return policy
 
 
 if __name__ == "__main__":
-    train()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--case", choices=CASES, default=CASE)
+    parser.add_argument("--episodes", type=int, default=EPISODES)
+    parser.add_argument("--batch-size", type=int, default=BATCH_SIZE)
+    parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--num-workers", type=int, default=NUM_WORKERS,
+                        help="independent FEM processes (0: serial reference)")
+    parser.add_argument("--device", default=DEVICE)
+    parser.add_argument("--output")
+    args = parser.parse_args()
+    train(case=args.case, episodes=args.episodes,
+          batch_size=args.batch_size, seed=args.seed, num_workers=args.num_workers,
+          device=args.device, output=args.output)

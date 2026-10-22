@@ -1,16 +1,13 @@
 # RL-AMR
 
-```powershell
-wsl -d Ubuntu
+```bash
+conda activate pinn
+python -m train --case bumps --num-workers 8
+python -m train --case advection --num-workers 8
 ```
 
 ```bash
-conda activate pinn
-python -m train
+python -m evaluation_plot.plot --case bumps --checkpoint data/static_bump/checkpoint.pt --orders 2 3 5 --episodes 100 --workers 16 --no-show
+python -m evaluation_plot.plot --case advection --orders 2 4 --episodes 100 --workers 16 --no-show
+python evaluation_plot/plot_static-bump.py --checkpoint data/static_bump/checkpoint.pt
 ```
-
-Settings are at the top of each file: training, optimizer and paths in `train.py`; network in `model.py`; FEM and sampling in `static_bump.py`.
-
-Terminal: GPU and settings at startup; current-episode error, reward and loss every 100 episodes and at completion.
-
-Outputs: `data/<run>/checkpoint.pt`, `history.csv`, `training.png`.

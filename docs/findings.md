@@ -1,20 +1,34 @@
 # Findings
 
-- Original run history ends at episode 409; no checkpoint exists in that run.
-- train.py saves a checkpoint only after all episodes.
-- StaticBump uses serial MFEM, repeated reset/refinement/point sampling; batch accumulates policy graphs.
-- Existing source files are user work (untracked); preserve unrelated changes.
-- WSL pinn: Python 3.12.0, torch 2.14.0 (CUDA 13.0), numpy 2.5.3, mfem 4.10.0.
-- Baseline uses batch 64, seed 0, CUDA, Adam 1e-4, unchanged model and FEM parameters; bounded to 512 episodes to cross original failure near 409.
-- Added separate diagnose_crash.py; traces phases/actions, /proc RSS and CUDA allocator every 5 seconds; snapshots sources in each diagnostic directory.
-- Early baseline RSS about 1.5 GiB, WSL available memory about 13 GiB. No early exhaustion evidence. gdb/lldb are not installed; core_pattern routes to /wsl-capture-crash.
-- First diagnostic failed at episode 97 step 1 in _state / np.fromiter / GetValue with ValueError: too many values to unpack (expected 2). This differs from original abort; relation not yet established. First 88 episode outputs matched original exactly when checked before failure.
-- Just before failure RSS 1,772,496 kB and CUDA allocated 197,004,800 bytes, no resource exhaustion observed.
-- FEM-only replay of episode 97 step 1 repeated 100 times passed (15.2 seconds). Second full-training attempt passed episode 100, so the first diagnostic exception is not deterministic for that seed/action.
-- FEM-only full recorded action sequence from episodes 1-97 also passed (109.9 seconds). Second training run crossed episode 300; RSS ~1.7 GiB stable after warmup, CUDA reserved ~400 MiB.
-- Second training run matched original history for every one of the 409 available episodes (final_error and policy_loss), then crossed episode 434 without failure.
-- Fixed-grid CPU-only GetValue/fromiter stress passed 40,000,000 sample evaluations (97.3 seconds), no reset/refinement or training involved.
-- baseline_repeat completed all 512 episodes in 618.3 seconds and saved checkpoint/history/plot. No source fix applied; original abort remains unreproduced.
-- WSL core_pattern points at /wsl-capture-crash, but that executable is absent, and standard crash directories contain no core files.
-- Planning files were moved externally into docs/ during investigation; continued at their new location. SHA256 of current train.py/static_bump.py matches baseline snapshots.
-- Repeated full _state reconstruction on a fixed mesh passed 3000 iterations, including repeated FindPoints and integration-point allocation/release (about 220 seconds). Its old log's 'calls' label is repeat*40000, not a valid measured scalar-call count for this mode; report only state iterations.
+- Project-wide simplification: worker command dispatch uses reset/step directly, redundant command/seed bookkeeping and routine argument guards removed. Native-object release order, solver convergence, point-location checks and bounded worker shutdown remain.
+- Evaluation shares load_policy/indicator_action/collect in the existing plot.py; no extra helper module. Both case classes expose element_errors(), and advection's seam integration is no longer duplicated in the transfer plot.
+- Default output names are bumps_IPN/advection_IPN. The training API now selects case by name: train(case="advection"). Setup runs once before the training loop.
+- Saved pre-simplification sources in tem/simplify/before. Full static/advection trajectories match observations/masks exactly and errors within rtol=1e-13; both ZZ/TrueError actions match. Shared error arrays match the former transfer implementation exactly. Policy action/loss/gradients are unchanged; serial/two-process results and Python-error/native-exit reporting pass.
+
+- Architecture inspection (2026-10-22): StaticBump and AdvectionBump already share the FEMWorkers contract. Case selection needs only a class mapping; the training loop needs no case-specific branches.
+- Keep IPN.forward and state_dict unchanged so existing evaluation scripts and checkpoints remain usable.
+- Final architecture keeps only model.py and train.py for policy/training responsibilities; no separate trainer module. Both cases use the same loop without case branches.
+- Verified exact action/log-probability equivalence at episodes 0/100/500/700 and exact loss/gradient equivalence against the former inline formulas. Adam settings and old checkpoint loading pass.
+- Final CPU integration: static 2 episodes / 2 workers; advection 3 episodes / batch size 2 / 2 workers (including the partial final batch). Both save reloadable checkpoints, correct reward totals, CSV and plots. These checks do not establish trained policy quality or CUDA execution.
+
+- Current static_bump.py projects an analytic Gaussian sum into an MFEM H1 space and calls ComputeL2Error(exact).
+- train.py uses StaticBump, online episode seeds, and normalized error-reduction rewards; no validation entry point exists.
+- The existing IPN chooses a refinement action; it does not predict a solution or its error.
+- Current static distribution differs from the supplied advection table. Do not change static settings to match it.
+- The checkout contains pre-existing modified and deleted files; preserve them.
+
+- User requests one advection_bump.py, compatible with FEMWorkers settings/reset(seed)/step(action), no dataset partitioning.
+- Paper: DG second-order Bernstein, periodic unit square, velocity (1,0), initial 8x8 mesh, max depth 2, 20 RL steps, physical time 0.1 per RL step.
+- Initial condition is projected once. Refinement transfers existing numerical solution before PDE evolution; true solution is used only for scoring.
+- MFEM official PyMFEM example 9 provides standard weak DG advection volume and upwind face forms.
+
+- Existing WSL pinn has working MFEM. Verified periodic mesh creation, DG refinement transfer, and physical element transforms.
+- Implemented initial single-file DG/RK4 environment. First smoke test passes reset, refine, no-refine, and time advance.
+- MFEM Vector constructor requires list rather than tuple in this runtime; corrected and retained coefficient vector lifetime.
+- Explicit periodic convention: wrap the stated Gaussian sum on the fundamental square; nonzero tails can create seam jumps (paper does not specify a smoothing convention).
+
+- Final implementation uses upwind DG advection and RK4 with a conservative cell-size/order CFL bound. These are explicit implementation choices; the paper does not fully specify its time integrator.
+- Broad bumps exposed 2-4% error-quadrature bias when integrating across the moving periodic seam. Fixed by splitting each physical cell at the transported seams before Gauss integration.
+- Seam-aware order-20 and order-40 integration agree within 1.4e-17 in the checked broad-bump cases.
+- Validation passed: mass drift 1.04e-17; centroid displacement 0.099976 for target 0.1; errors on 8x8 and 16x16 grids 0.01995917 and 0.00796771; two workers match serial observations/masks/errors exactly.
+- CPU training integration test: two episodes with two workers, checkpoint saved and reloaded into IPN, followed by two complete inference episodes. This is an integration smoke test, not a policy-performance result.

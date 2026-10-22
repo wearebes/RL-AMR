@@ -76,8 +76,6 @@ class StaticBump:
         self.steps = 0
         self._project()
         self.state = self._state()
-        if self.state["error"] <= 0:
-            raise ValueError("Initial L2 error must be positive for normalized reward")
         return self.state
 
     def _project(self):
@@ -85,11 +83,9 @@ class StaticBump:
         self.solution.RestrictConforming()
 
     def step(self, action):
-        if self.steps >= self.settings["budget"]:
-            raise RuntimeError("Episode finished; call reset before stepping again")
         if not 0 <= action < len(self.state["valid_actions"]) or not self.state["valid_actions"][action]:
             raise ValueError("Invalid action for the current mesh")
-        if action != 0:
+        if action:
             self.mesh.GeneralRefinement(mfem.intArray([action - 1]), 1, 0)
             self.fes.Update()
             self.solution.Update()
@@ -97,6 +93,11 @@ class StaticBump:
             self.state = self._state()
         self.steps += 1
         return self.state, self.steps == self.settings["budget"]
+
+    def element_errors(self):
+        errors = mfem.Vector(self.mesh.GetNE())
+        self.solution.ComputeElementL2Errors(self.exact, errors)
+        return errors.GetDataArray().copy()
 
     def _state(self):
         count = self.mesh.GetNE()

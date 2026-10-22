@@ -1,3 +1,4 @@
-/data/
+/tem/
 __pycache__/
 *.pyc
+/docs/
