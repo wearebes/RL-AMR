@@ -4,6 +4,9 @@ from importlib.metadata import version
 import mfem.ser as mfem
 import numpy as np
 
+from FEM.common import (ELEMENT_SAMPLES, CONTEXT_SAMPLES, WINDOW_SIZE,
+                        sample_bumps, observation_points, locate_samples, sample_observation)
+
 
 # Mesh and approximation
 NX = 8
@@ -17,12 +20,6 @@ MAX_DEPTH = 3
 BUMP_COUNT = (1, 6)
 CENTER_RANGE = (0.2, 0.9)
 WIDTH_RANGE = (0.05, 0.2)
-
-# Observation sampling
-ELEMENT_SAMPLES = 16
-CONTEXT_SAMPLES = 4
-WINDOW_SIZE = ELEMENT_SAMPLES + 2 * CONTEXT_SAMPLES
-
 
 class BumpFunction(mfem.PyCoefficient):
     def __init__(self, parameters):
@@ -57,18 +54,14 @@ class StaticBump:
         self.mesh = self.fec = self.fes = self.solution = None
 
     def reset(self, seed=0, bumps=None):
-        rng = np.random.default_rng(seed)
-        if bumps is None:
-            count = rng.integers(BUMP_COUNT[0], BUMP_COUNT[1] + 1)
-            bumps = np.column_stack((rng.uniform(*CENTER_RANGE, (count, 2)),
-                                     rng.uniform(*WIDTH_RANGE, count)))
-        self.bumps = np.array(bumps, dtype=np.float64, copy=True)
+        self.bumps = sample_bumps(seed, self.settings["bump_count"], self.settings["center_range"],
+                                  self.settings["width_range"], bumps)
         self.exact = BumpFunction(self.bumps)
         # Release dependent MFEM objects before replacing their mesh.
         self.solution = self.fes = self.fec = self.mesh = None
         self.mesh = mfem.Mesh.MakeCartesian2D(self.settings["nx"], self.settings["ny"],
                                               mfem.Element.QUADRILATERAL, True,
-                                              DOMAIN_SIZE, DOMAIN_SIZE)
+                                              self.settings["domain_size"], self.settings["domain_size"])
         self.mesh.EnsureNCMesh()
         self.fec = mfem.H1_FECollection(self.settings["order"], 2, mfem.BasisType.Positive)
         self.fes = mfem.FiniteElementSpace(self.mesh, self.fec)
@@ -83,8 +76,6 @@ class StaticBump:
         self.solution.RestrictConforming()
 
     def step(self, action):
-        if not 0 <= action < len(self.state["valid_actions"]) or not self.state["valid_actions"][action]:
-            raise ValueError("Invalid action for the current mesh")
         if action:
             self.mesh.GeneralRefinement(mfem.intArray([action - 1]), 1, 0)
             self.fes.Update()
@@ -107,21 +98,9 @@ class StaticBump:
         depths = np.array([self.mesh.ncmesh.GetElementDepth(i) for i in range(count)])
 
         # Sample the FEM solution in physical space, including actual neighbors.
-        positions = (np.arange(WINDOW_SIZE) - CONTEXT_SAMPLES + 0.5) / ELEMENT_SAMPLES
-        xx, yy = np.meshgrid(positions, positions, indexing="xy")
-        local = np.stack((xx, yy), axis=-1)
-        points = lower[:, None, None, :] + (upper - lower)[:, None, None, :] * local
-        points = np.clip(points, 0.0, DOMAIN_SIZE).reshape(-1, 2)
-        unique, inverse = np.unique(points, axis=0, return_inverse=True)
-        found, elements, integration_points = self.mesh.FindPoints(unique, warn=False)
-        if found != len(unique):
-            raise RuntimeError("MFEM could not locate observation sample points")
-        values = np.fromiter((self.solution.GetValue(e, integration_points[i])
-                              for i, e in enumerate(elements)), dtype=np.float64,
-                             count=len(unique))
-        observation = np.zeros((count + 1, 2, WINDOW_SIZE, WINDOW_SIZE), dtype=np.float32)
-        observation[1:, 0] = values[inverse].reshape(count, WINDOW_SIZE, WINDOW_SIZE)
-        observation[1:, 1] = depths[np.asarray(elements)[inverse]].reshape(count, WINDOW_SIZE, WINDOW_SIZE)
+        points = np.clip(observation_points(lower, upper), 0.0, self.settings["domain_size"])
+        elements, integration_points, inverse = locate_samples(self.mesh, points)
+        observation = sample_observation(self.solution, depths, elements, integration_points, inverse)
         valid = np.concatenate(([True], depths < self.settings["max_depth"]))
         error = self.solution.ComputeL2Error(self.exact)
         return {"observation": observation, "valid_actions": valid, "error": error}

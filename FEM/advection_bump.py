@@ -1,7 +1,7 @@
 """Periodic advection of Gaussian bumps, compatible with FEMWorkers.
 
 Use ``FEMWorkers(AdvectionBump, num_workers=4)`` for independent CPU episodes,
-or ``train(case="advection")`` with the shared training function.
+or select ``training.case: advection`` in the training YAML.
 The policy sees only the numerical solution and mesh depth. ``state['error']``
 compares that solution with the transported analytic initial condition.
 """
@@ -10,6 +10,9 @@ from importlib.metadata import version
 
 import mfem.ser as mfem
 import numpy as np
+
+from FEM.common import (ELEMENT_SAMPLES, CONTEXT_SAMPLES, WINDOW_SIZE,
+                        sample_bumps, observation_points, locate_samples, sample_observation)
 
 
 NX = NY = 8
@@ -26,10 +29,6 @@ BUMP_COUNT = (1, 4)
 CENTER_RANGE = (0.3, 0.7)
 WIDTH_RANGE = (0.005, 0.05)
 
-ELEMENT_SAMPLES = 16
-CONTEXT_SAMPLES = 4
-WINDOW_SIZE = ELEMENT_SAMPLES + 2 * CONTEXT_SAMPLES
-
 
 class BumpFunction(mfem.PyCoefficient):
     """Exact transport of the periodic extension of the paper's Gaussian sum.
@@ -39,13 +38,14 @@ class BumpFunction(mfem.PyCoefficient):
     retains the stated initial function rather than adding Gaussian images.
     """
 
-    def __init__(self, parameters):
+    def __init__(self, parameters, settings):
         super().__init__()
         self.parameters = parameters
+        self.settings = settings
         self.time = 0.0
 
     def values(self, points):
-        points = (np.asarray(points) - self.time * np.asarray(VELOCITY)) % DOMAIN_SIZE
+        points = (np.asarray(points) - self.time * np.asarray(self.settings["velocity"])) % self.settings["domain_size"]
         delta = points[..., None, :] - self.parameters[:, :2]
         return np.exp(-(delta ** 2).sum(axis=-1) / self.parameters[:, 2]).sum(axis=-1)
 
@@ -56,9 +56,9 @@ class BumpFunction(mfem.PyCoefficient):
 class AdvectionOperator(mfem.PyTimeDependentOperator):
     """DG semidiscrete system: M du/dt = K u, with upwind fluxes."""
 
-    def __init__(self, space):
+    def __init__(self, space, velocity):
         super().__init__(space.GetVSize())
-        self.velocity_vector = mfem.Vector(list(VELOCITY))
+        self.velocity_vector = mfem.Vector(list(velocity))
         self.velocity = mfem.VectorConstantCoefficient(self.velocity_vector)
         self.mass = mfem.BilinearForm(space)
         self.mass.AddDomainIntegrator(mfem.MassIntegrator())
@@ -85,8 +85,6 @@ class AdvectionOperator(mfem.PyTimeDependentOperator):
     def Mult(self, x, y):
         self.transport.SpMat().Mult(x, self.rhs)
         self.solver.Mult(self.rhs, y)
-        if not self.solver.GetConverged():
-            raise RuntimeError("Advection mass solve did not converge")
 
 
 class AdvectionBump:
@@ -115,26 +113,18 @@ class AdvectionBump:
         }
         self.mesh = self.fec = self.fes = self.solution = None
         self.operator = self.ode = None
-        nodes, weights = np.polynomial.legendre.leggauss((ERROR_QUADRATURE_ORDER + 2) // 2)
-        points = (nodes + 1.0) / 2.0
-        xx, yy = np.meshgrid(points, points, indexing="ij")
-        self.quadrature_points = np.stack((xx.ravel(), yy.ravel()), axis=-1)
-        self.gauss_weights = np.outer(weights, weights).ravel() / 4.0
 
     def reset(self, seed=0, bumps=None):
-        rng = np.random.default_rng(seed)
-        if bumps is None:
-            count = rng.integers(BUMP_COUNT[0], BUMP_COUNT[1] + 1)
-            bumps = np.column_stack((rng.uniform(*CENTER_RANGE, (count, 2)),
-                                     rng.uniform(*WIDTH_RANGE, count)))
-        self.bumps = np.array(bumps, dtype=np.float64, copy=True)
-        self.exact = BumpFunction(self.bumps)
+        self.bumps = sample_bumps(seed, self.settings["bump_count"], self.settings["center_range"],
+                                  self.settings["width_range"], bumps)
+        self.exact = BumpFunction(self.bumps, self.settings)
         # Release dependents first: MFEM objects own native references to the mesh.
         self.ode = self.operator = self.solution = self.fes = self.fec = self.mesh = None
-        base = mfem.Mesh.MakeCartesian2D(NX, NY, mfem.Element.QUADRILATERAL,
-                                         True, DOMAIN_SIZE, DOMAIN_SIZE)
-        shifts = mfem.vector_Vector([mfem.Vector([DOMAIN_SIZE, 0.0]),
-                                     mfem.Vector([0.0, DOMAIN_SIZE])])
+        size = self.settings["domain_size"]
+        base = mfem.Mesh.MakeCartesian2D(self.settings["nx"], self.settings["ny"],
+                                         mfem.Element.QUADRILATERAL, True, size, size)
+        shifts = mfem.vector_Vector([mfem.Vector([size, 0.0]),
+                                     mfem.Vector([0.0, size])])
         self.mesh = mfem.Mesh.MakePeriodic(base, base.CreatePeriodicVertexMapping(shifts))
         self.mesh.EnsureNCMesh()
         self.fec = mfem.L2_FECollection(self.settings["order"], 2, mfem.BasisType.Positive)
@@ -143,6 +133,12 @@ class AdvectionBump:
         self.solution.ProjectCoefficient(self.exact)
         self.time = 0.0
         self.steps = 0
+        nodes, weights = np.polynomial.legendre.leggauss((self.settings["error_quadrature_order"] + 2) // 2)
+        points = (nodes + 1.0) / 2.0
+        xx, yy = np.meshgrid(points, points, indexing="ij")
+        self.quadrature_points = np.stack((xx.ravel(), yy.ravel()), axis=-1)
+        self.gauss_weights = np.outer(weights, weights).ravel() / 4.0
+
         self._update_mesh()
         self.state = self._state()
         return self.state
@@ -150,7 +146,7 @@ class AdvectionBump:
     def _update_mesh(self):
         """Rebuild the PDE operator and observation coordinates after refinement."""
         self.ode = self.operator = None
-        self.operator = AdvectionOperator(self.fes)
+        self.operator = AdvectionOperator(self.fes, self.settings["velocity"])
         self.ode = mfem.RK4Solver()
         self.ode.Init(self.operator)
         count = self.mesh.GetNE()
@@ -166,31 +162,21 @@ class AdvectionBump:
         self.lower, self.upper = lower, upper
         self.depths = np.array([self.mesh.ncmesh.GetElementDepth(i) for i in range(count)])
         # Conservative DG step based on the smallest current cell and polynomial order.
-        rate = (np.abs(VELOCITY) / (upper - lower)).sum(axis=1).max()
-        self.dt = CFL / ((2 * self.settings["order"] + 1) * rate)
+        rate = (np.abs(self.settings["velocity"]) / (upper - lower)).sum(axis=1).max()
+        self.dt = self.settings["cfl"] / ((2 * self.settings["order"] + 1) * rate)
         if not self.observe:
             return
-        positions = (np.arange(WINDOW_SIZE) - CONTEXT_SAMPLES + 0.5) / ELEMENT_SAMPLES
-        xx, yy = np.meshgrid(positions, positions, indexing="xy")
-        local = np.stack((xx, yy), axis=-1)
-        points = lower[:, None, None, :] + (upper - lower)[:, None, None, :] * local
-        points = points.reshape(-1, 2) % DOMAIN_SIZE
-        unique, self.sample_inverse = np.unique(points, axis=0, return_inverse=True)
-        found, self.sample_elements, self.sample_points = self.mesh.FindPoints(unique, warn=False)
-        if found != len(unique):
-            raise RuntimeError("MFEM could not locate periodic observation sample points")
+        points = observation_points(lower, upper) % self.settings["domain_size"]
+        self.sample_elements, self.sample_points, self.sample_inverse = locate_samples(self.mesh, points)
 
     def step(self, action):
-        if (not 0 <= action < len(self.state["valid_actions"]) or
-                not self.state["valid_actions"][action]):
-            raise ValueError("Invalid action for the current mesh")
         if action:
             self.ode = self.operator = None
             self.mesh.GeneralRefinement(mfem.intArray([int(action) - 1]), 1, 0)
             self.fes.Update()
             self.solution.Update()  # Transfer u_h, never replace it with the true solution.
             self._update_mesh()
-        target = (self.steps + 1) * ACTION_TIME
+        target = (self.steps + 1) * self.settings["action_time"]
         substeps = int(np.ceil((target - self.time) / self.dt))
         dt = (target - self.time) / substeps
         for _ in range(substeps):
@@ -203,7 +189,7 @@ class AdvectionBump:
 
     def element_errors(self):
         """Integrate (u_h - u_true)^2, splitting cells at the transported seams."""
-        seam = (self.time * np.asarray(VELOCITY)) % DOMAIN_SIZE
+        seam = (self.time * np.asarray(self.settings["velocity"])) % self.settings["domain_size"]
         errors = np.zeros(self.mesh.GetNE())
         values = mfem.Vector()
         for element, (lower, upper) in enumerate(zip(self.lower, self.upper)):
@@ -225,19 +211,11 @@ class AdvectionBump:
         return np.sqrt(errors)
 
     def _state(self):
-        count = self.mesh.GetNE()
         observation = None
         if self.observe:
-            values = np.fromiter((self.solution.GetValue(int(e), self.sample_points[i])
-                                  for i, e in enumerate(self.sample_elements)),
-                                 dtype=np.float64, count=len(self.sample_elements))
-            observation = np.zeros((count + 1, 2, WINDOW_SIZE, WINDOW_SIZE), dtype=np.float32)
-            observation[1:, 0] = values[self.sample_inverse].reshape(count, WINDOW_SIZE, WINDOW_SIZE)
-            sampled_depth = self.depths[np.asarray(self.sample_elements)[self.sample_inverse]]
-            observation[1:, 1] = sampled_depth.reshape(count, WINDOW_SIZE, WINDOW_SIZE)
+            observation = sample_observation(self.solution, self.depths, self.sample_elements,
+                                             self.sample_points, self.sample_inverse)
         error = float(np.linalg.norm(self.element_errors()))
-        if not np.isfinite(error) or (observation is not None and not np.isfinite(observation).all()):
-            raise RuntimeError("Advection produced a non-finite solution or error")
         return {"observation": observation,
-                "valid_actions": np.concatenate(([True], self.depths < MAX_DEPTH)),
-                "error": float(error), "time": self.time}
+                "valid_actions": np.concatenate(([True], self.depths < self.settings["max_depth"])),
+                "error": error, "time": self.time}

@@ -1,0 +1,25 @@
+# Paths are relative to the project root. Copy this file for a new run setup.
+training:
+  case: advection  # bumps | advection
+  episodes: 20000
+  batch_size: 128  # Complete episode batch per optimizer update.
+  seed: 0
+  device: cuda
+  torch_cpu_threads: 2
+  num_workers: 16  # Independent FEM processes; 0 means serial.
+  print_every: 100
+  output: null  # Default: data/<case>_IPN; directory must not exist.
+
+learning:
+  gamma: 0.99  # Discount: sum_t gamma^t * G_t * log pi(a_t|s_t).
+  adam:
+    lr: 0.0001
+    betas: [0.9, 0.999]
+    eps: 0.00000001
+    weight_decay: 0.0
+  exploration:
+    start: 0.5
+    end: 0.05
+    decay_episodes: 500
+  reward:
+    scale: 1.0  # scale * (previous_error - current_error) / initial_error.

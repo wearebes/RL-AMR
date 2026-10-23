@@ -1,0 +1,27 @@
+# Paths are relative to the project root. Select one experiment in evaluate.py.
+defaults:
+  episodes: 100
+  seed: 100000
+  workers: 4  # 0: serial
+
+experiments:
+  bumps:
+    mode: degree
+    case: bumps
+    checkpoint: data/static_bump/checkpoint.pt
+    orders: [2, 3, 5]
+    output: data/static_bump/degree.npz
+
+  advection:
+    mode: degree
+    case: advection
+    checkpoint: data/advection_IPN/checkpoint.pt
+    orders: [2, 4]
+    output: data/advection_IPN/degree.npz
+
+  transfer:
+    mode: transfer
+    case: advection
+    checkpoint: data/static_bump/checkpoint.pt
+    budgets: [10, 100]
+    output: data/static_bump/transfer.npz
