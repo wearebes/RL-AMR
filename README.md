@@ -37,3 +37,12 @@ RL-AMR/
 python -m evaluation.plot data/advection_IPN/history.csv
 python -m evaluation.evaluate bumps --config /path/to/evaluation.yaml
 ```
+python -m pip install --only-binary=:all: \
+  KratosMultiphysics==10.4.4 \
+  KratosFluidDynamicsApplication==10.4.4 \
+  KratosStructuralMechanicsApplication==10.4.4 \
+  KratosFSIApplication==10.4.4 \
+  KratosMeshMovingApplication==10.4.4 \
+  KratosConstitutiveLawsApplication==10.4.4 \
+  KratosMappingApplication==10.4.4 \
+  KratosLinearSolversApplication==10.4.4
