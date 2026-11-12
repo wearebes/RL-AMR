@@ -1,0 +1,214 @@
+
+.TH msqshape 1
+
+.SH NAME
+
+.P 
+msqshape - Run Shape Improvement smoother for input mesh.
+
+
+.SH SYNOPSIS
+
+.HP 
+
+.B
+msqshape
+ [
+.B
+-b
+<Vtx Movement Beta>] [
+.B
+-t
+<Cpu Seconds>] [
+.B
+-s
+] [
+.B
+-S
+<rad,x,y,z>|
+.B
+-S
+<rad>] [
+.B
+-P
+<i,j,k>|
+.B
+-P
+<i,j,k,x,y,z>] [
+.B
+-C
+<rad,i,j,k>|
+.B
+-C
+<rad,i,j,k,x,y,z>] [
+.B
+-N
+<rad,h>|
+.B
+-N
+<rad,h,i,j,k>|
+.B
+-N
+<rad,h,i,j,k,x,y,z>] [
+.B
+-l
+<i,j,k>|
+.B
+-l
+<i,j,k,x,y,z>] [
+.B
+-c
+<rad,i,j,k>|
+.B
+-c
+<rad,i,j,k,x,y,z>] [
+.B
+-v
+<x,y,z>] <input_file> <output_file>
+
+.HP 
+
+.B
+msqshape -h
+
+.HP 
+
+.B
+msqshape -M
+
+.SH DESCRIPTION
+
+.P 
+Read VTK file, smooth, and re-write file.
+.SH OPTIONS
+
+.HP 
+
+.B
+-b
+<Vtx Movement Beta>
+.RS 
+
+.P 
+fraction of mean edge length to use as termination criterion on vertex movement [0,1]
+.RE 
+
+.HP 
+
+.B
+-t
+<Cpu Seconds>
+.RS 
+
+.P 
+time-out [0,inf) (default: 0)
+.RE 
+
+.HP 
+
+.B
+-s
+
+.RS 
+
+.P 
+Mark boundary vertices as fixed (default if no domain specified) (default: 0)
+.RE 
+
+.HP 
+
+.B
+-S
+<rad,x,y,z>|
+.B
+-S
+<rad>
+.RS 
+
+.P 
+Spherical domain as center and radius
+.RE 
+
+.HP 
+
+.B
+-P
+<i,j,k>|
+.B
+-P
+<i,j,k,x,y,z>
+.RS 
+
+.P 
+Planar domain as normal and point
+.RE 
+
+.HP 
+
+.B
+-C
+<rad,i,j,k>|
+.B
+-C
+<rad,i,j,k,x,y,z>
+.RS 
+
+.P 
+Cylindrical radius, axis, and point
+.RE 
+
+.HP 
+
+.B
+-N
+<rad,h>|
+.B
+-N
+<rad,h,i,j,k>|
+.B
+-N
+<rad,h,i,j,k,x,y,z>
+.RS 
+
+.P 
+Conic domain as base radius, height, axis, and base center
+.RE 
+
+.HP 
+
+.B
+-l
+<i,j,k>|
+.B
+-l
+<i,j,k,x,y,z>
+.RS 
+
+.P 
+Linear domain as direction and point
+.RE 
+
+.HP 
+
+.B
+-c
+<rad,i,j,k>|
+.B
+-c
+<rad,i,j,k,x,y,z>
+.RS 
+
+.P 
+Circular domain as radius, normal, and center
+.RE 
+
+.HP 
+
+.B
+-v
+<x,y,z>
+.RS 
+
+.P 
+Point domain
+.RE 
