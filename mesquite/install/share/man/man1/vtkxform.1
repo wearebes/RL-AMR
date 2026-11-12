@@ -1,0 +1,108 @@
+
+.TH vtkxform 1
+
+.SH NAME
+
+.P 
+vtkxform - Transform a mesh
+
+
+.SH SYNOPSIS
+
+.HP 
+
+.B
+vtkxform
+ [
+.B
+-r
+<a,i,j,k>] [
+.B
+-s
+<s>|
+.B
+-s
+<sx,sy,sz>] [
+.B
+-t
+<dx,dy,dz>] [
+.B
+-f
+] [
+.B
+-k
+] <input_file> <output_file>
+
+.HP 
+
+.B
+vtkxform -h
+
+.HP 
+
+.B
+vtkxform -M
+
+.SH DESCRIPTION
+
+.P 
+Apply one or more transformations to vertex coordinates in a mesh read from a VTK file.
+.SH OPTIONS
+
+.HP 
+
+.B
+-r
+<a,i,j,k>
+.RS 
+
+.P 
+Specify a rotation as an angle in degrees counter-clockwise about a vector
+.RE 
+
+.HP 
+
+.B
+-s
+<s>|
+.B
+-s
+<sx,sy,sz>
+.RS 
+
+.P 
+Specify factor(s) by which to scale mesh about origin
+.RE 
+
+.HP 
+
+.B
+-t
+<dx,dy,dz>
+.RS 
+
+.P 
+Specify translation of vertex coordinates.
+.RE 
+
+.HP 
+
+.B
+-f
+
+.RS 
+
+.P 
+Do not move fixed vertices.
+.RE 
+
+.HP 
+
+.B
+-k
+
+.RS 
+
+.P 
+Mark boundary vertices as fixed
+.RE 
