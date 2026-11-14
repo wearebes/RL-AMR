@@ -1,0 +1,1077 @@
+ |  /           |                  
+ ' /   __| _` | __|  _ \   __|    
+ . \  |   (   | |   (   |\__ \  
+_|\_\_|  \__,_|\__|\___/ ____/
+           Multi-Physics 10.4."4"--0-Release-x86_64
+           Compiled for GNU/Linux and Python3.12 with GCC-15.2
+Compiled with threading and MPI support. Threading support with OpenMP.
+Maximum number of threads: 32.
+Running without MPI.
+Importing    KratosFSIApplication 
+Initializing KratosFSIApplication...
+Importing    KratosFluidDynamicsApplication 
+Initializing KratosFluidDynamicsApplication...
+Importing    KratosStructuralMechanicsApplication 
+    KRATOS   ___|  |                   |                   |
+           \___ \  __|  __| |   |  __| __| |   |  __| _` | |
+                 | |   |    |   | (    |   |   | |   (   | |
+           _____/ \__|_|   \__,_|\___|\__|\__,_|_|  \__,_|_| MECHANICS
+Initializing KratosStructuralMechanicsApplication...
+Importing    KratosConstitutiveLawsApplication 
+Initializing KratosConstitutiveLawsApplication...
+Importing    KratosMeshMovingApplication 
+    KRATOS  __  __        _    __  __         _
+           |  \/  |___ __| |_ |  \/  |_____ _(_)_ _  __ _
+           | |\/| / -_|_-< ' \| |\/| / _ \ V / | ' \/ _` |
+           |_|  |_\___/__/_||_|_|  |_\___/\_/|_|_||_\__, |
+                                                    |___/
+Initializing KratosMeshMovingApplication...
+[WARNING] DataCommunicator: This function is deprecated, please retrieve the DataCommunicator through the ModelPart (or by name in special cases)
+Importing    LinearSolversApplication 
+    Kratos  _     _                       ____        _
+           | |   (_)_ __   ___  __ _ _ __/ ___|  ___ | |_   _____ _ __ ___
+           | |   | | '_ \ / _ \/ _` | '__\___ \ / _ \| \ \ / / _ \ '__/ __|
+           | |___| | | | |  __/ (_| | |   ___) | (_) | |\ V /  __/ |  \__ \
+           |_____|_|_| |_|\___|\__,_|_|  |____/ \___/|_| \_/ \___|_|  |___/
+Initializing KratosLinearSolversApplication...
+Importing    KratosMappingApplication 
+    KRATOS ______  ___                      _____
+           ___   |/  /_____ ___________________(_)_____________ _
+           __  /|_/ /_  __ `/__  __ \__  __ \_  /__  __ \_  __ `/
+           _  /  / / / /_/ /__  /_/ /_  /_/ /  / _  / / /  /_/ /
+           /_/  /_/  \__,_/ _  .___/_  .___//_/  /_/ /_/_\__, /
+                            /_/     /_/                 /____/
+Initializing KratosMappingApplication...
+[WARNING] ::[MechanicalSolver]:: : Settings contain no longer used setting, please remove it: "problem_domain_sub_model_part_list" 
+[WARNING] ::[MechanicalSolver]:: : Settings contain no longer used setting, please remove it: "processes_sub_model_part_list" 
+::[MechanicalSolver]:: : Construction finished 
+::[ImplicitMechanicalSolver]:: : Construction finished 
+PartitionedFSIBaseSolver: Structure solver construction finished. 
+NavierStokesMonolithicSolver: Construction of NavierStokesMonolithicSolver finished. 
+PartitionedFSIBaseSolver: Fluid solver construction finished. 
+::[MeshSolverBase]:: Construction finished: 
+::[MeshSolverStructuralSimilarity]:: Construction finished: 
+PartitionedFSIBaseSolver: ALE mesh solver construction finished. 
+PartitionedFSIBaseSolver: Partitioned FSI base solver construction finished. 
+::[MechanicalSolver]:: : Variables ADDED 
+::[ImplicitMechanicalSolver]:: : Variables ADDED 
+NavierStokesMonolithicSolver: Fluid solver variables added correctly. 
+::[MeshSolverBase]:: Variables ADDED.: 
+::[PythonSolver]::: Reading model part. 
+SingleImportModelPart: Reading model part from file: "/mnt/e/Research/RL-AMR/Smoothing/data/t1_prcg/fsi_turek_FSI2_Fluid".mdpa
+ModelPartIO:   [Reading Nodes    : 15577 nodes read]
+ModelPartIO:   [Reading Elements : 29926 elements read] [Type: Element2D3N]
+ModelPartIO:   [Reading Conditions : 1228 conditions read] [Type: WallCondition2D2N]
+ModelPartIO:   [Total Lines Read : 95572]
+SingleImportModelPart: Finished reading model part from mdpa file.
+ModelPart: -FluidModelPart- model part
+    Buffer Size : 1
+    Number of tables : 0
+    Number of sub model parts : 9
+    Current solution step index : 0
+    DOMAIN_SIZE : 2
+
+    Mesh 0 :
+        Number of Nodes       : 15577
+        Number of Properties  : 2
+        Number of Elements    : 29926
+        Number of Conditions  : 1228
+        Number of Geometries  : 0
+        Number of Constraints : 0
+
+    -ALEMeshDisplacementBC2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFixXY- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 84
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFreeX- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -AutomaticInlet2D_Inlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -FluidNoSlipInterface2D_FluidInterface- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 451
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 450
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 196
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_NoSlip- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 500
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Outlet2D_Outlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Parts_Fluid- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 15577
+            Number of Properties  : 0
+            Number of Elements    : 29926
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+ 
+::[PythonSolver]:: : Finished reading model part. 
+::[PythonSolver]::: Reading model part. 
+SingleImportModelPart: Reading model part from file: "/mnt/e/Research/RL-AMR/Smoothing/data/t1_prcg/fsi_turek_FSI2_Structural".mdpa
+ModelPartIO:   [Reading Nodes    : 2816 nodes read]
+ModelPartIO:   [Reading Elements : 2625 elements read] [Type: TotalLagrangianElement2D4N]
+ModelPartIO:   [Reading Conditions : 365 conditions read] [Type: LineCondition2D2N]
+ModelPartIO:   [Total Lines Read : 12035]
+SingleImportModelPart: Finished reading model part from mdpa file.
+ModelPart: -Structure- model part
+    Buffer Size : 1
+    Number of tables : 0
+    Number of sub model parts : 3
+    Current solution step index : 0
+    DOMAIN_SIZE : 2
+    OSS_SWITCH : 0
+    IS_RESTARTED : 0
+
+    Mesh 0 :
+        Number of Nodes       : 2816
+        Number of Properties  : 1
+        Number of Elements    : 2625
+        Number of Conditions  : 365
+        Number of Geometries  : 0
+        Number of Constraints : 0
+
+    -DISPLACEMENT_FixedDisplacement- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 16
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Parts_Structure- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 2816
+            Number of Properties  : 0
+            Number of Elements    : 2625
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -StructureInterface2D_StructureInterface- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 366
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 365
+            Number of Geometries  : 0
+            Number of Constraints : 0
+ 
+::[PythonSolver]:: : Finished reading model part. 
+::[PythonSolver]::: Reading model part. 
+::[PythonSolver]::: Using already imported model part - no reading necessary. 
+ModelPart: -FluidModelPart- model part
+    Buffer Size : 1
+    Number of tables : 0
+    Number of sub model parts : 9
+    Current solution step index : 0
+    DOMAIN_SIZE : 2
+
+    Mesh 0 :
+        Number of Nodes       : 15577
+        Number of Properties  : 2
+        Number of Elements    : 29926
+        Number of Conditions  : 1228
+        Number of Geometries  : 0
+        Number of Constraints : 0
+
+    -ALEMeshDisplacementBC2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFixXY- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 84
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFreeX- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -AutomaticInlet2D_Inlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -FluidNoSlipInterface2D_FluidInterface- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 451
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 450
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 196
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_NoSlip- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 500
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Outlet2D_Outlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Parts_Fluid- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 15577
+            Number of Properties  : 0
+            Number of Elements    : 29926
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+ 
+::[PythonSolver]:: : Finished reading model part. 
+Read materials: Started
+Read materials: Finished
+::[MechanicalSolver]:: : Constitutive law was successfully imported. 
+::[MechanicalSolver]::: ModelPart prepared for Solver. 
+Read materials: Started
+[WARNING] ReadMaterialsUtility: WARNING:: The properties ID: 1 is already defined in model part(s) [FluidModelPart.Parts_Fluid]. This will overwrite the existing values
+Read materials: Finished
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Construction from model part is deprecated. Please provide a 'Model' container and use full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'Parts_Fluid' found in 'volume_model_part_name'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'AutomaticInlet2D_Inlet' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'Outlet2D_Outlet' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'NoSlip2D_NoSlip' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'NoSlip2D_Cylinder' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'FluidNoSlipInterface2D_FluidInterface' found in 'skin_parts'. Please provide full model part names. 
+FluidModelPart.Parts_Fluid
+TetrahedralMeshOrientationCheck: No inverted elements found
+Mesh orientation check found 720 inverted conditions.
+The IDs of the inverted conditions are:
+	975,	592,	967,	584,	971,	588,	596,	973,	590,	598,	969,	586,	977,	594,	974,	591,	966,	583,	970,	587 ...
+NavierStokesMonolithicSolver: Model reading finished. 
+PartitionedFSIBaseSolver: Fluid fluid_positive FSI coupling interface created 
+PartitionedFSIBaseSolver: Coupling strategy construction finished 
+PartitionedFSIBaseSolver: Structure FSI coupling interface created 
+::[MechanicalSolver]:: : DOF's ADDED 
+::[ImplicitMechanicalSolver]:: : DOF's ADDED 
+NavierStokesMonolithicSolver: Fluid solver DOFs added correctly. 
+::[MeshSolverBase]:: DOFs ADDED.: 
+[WARNING] DEPRECATION-Warning; MappingApplication: The "MapperFactory" was moved to the Core! (used for "CreateMapper") 
+::[MechanicalSolver]:: : Initializing ... 
+::[MechanicalSolver]:: No linear solver was specified, using fastest available solver: 
+Linear-Solver-Factory: Creating "sparse_lu" as fastest available direct solver 
+::[MechanicalSolver]:: : Finished initialization. 
+Linear-Solver-Factory: Constructing a regular (non-complex) linear-solver 
+NavierStokesMonolithicSolver: Solver initialization finished. 
+Linear-Solver-Factory: Constructing a regular (non-complex) linear-solver 
+::[MeshSolverBase]:: Finished initialization.: 
+[WARNING] DEPRECATION-Warning; AnalysisStage: ModifyAfterSolverInitialize is deprecated. Please, use ModifyBeforeSolutionLoop instead. 
+fsi_turek_FSI2: Analysis -START- 
+fsi_turek_FSI2: STEP =  1 
+fsi_turek_FSI2: TIME =  0.002 
+[WARNING] ResidualBasedBlockBuilderAndSolver: ATTENTION! setting the RHS to zero!
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.954347032289334e-09 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  2 
+fsi_turek_FSI2: TIME =  0.004 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.152899999705272e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  3 
+fsi_turek_FSI2: TIME =  0.006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.004492561406522e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  4 
+fsi_turek_FSI2: TIME =  0.008 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.015750052934922e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.446133949586196e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 2.739432978055092e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  5 
+fsi_turek_FSI2: TIME =  0.01 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.067106814458169e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.8075314143836706e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  6 
+fsi_turek_FSI2: TIME =  0.012 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.1269656879996554e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.4878601309680537e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 1.2665121839580823e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 4 |res|/sqrt(nDOFS) = 2.6693618168667303e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 4 iterations. 
+fsi_turek_FSI2: STEP =  7 
+fsi_turek_FSI2: TIME =  0.014 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.935259678136776e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  8 
+fsi_turek_FSI2: TIME =  0.016 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.017619137780256e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.712156560047204e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  9 
+fsi_turek_FSI2: TIME =  0.018000000000000002 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.572476805651001e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  10 
+fsi_turek_FSI2: TIME =  0.020000000000000004 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.047690384249698e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.7847469924236589e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  11 
+fsi_turek_FSI2: TIME =  0.022000000000000006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.224840875476983e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.6253527891764234e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  12 
+fsi_turek_FSI2: TIME =  0.024000000000000007 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.320516659619147e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.681577654482658e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  13 
+fsi_turek_FSI2: TIME =  0.02600000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.215230309731807e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 7.889448074791761e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  14 
+fsi_turek_FSI2: TIME =  0.02800000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.668378546346741e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.469380364306108e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  15 
+fsi_turek_FSI2: TIME =  0.030000000000000013 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.45563413491973e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.474356099555232e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  16 
+fsi_turek_FSI2: TIME =  0.032000000000000015 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.894234583963129e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.089498398489638e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 2.5018290111078256e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  17 
+fsi_turek_FSI2: TIME =  0.034000000000000016 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.872048619632656e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.962791702182886e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 1.0345762505085891e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 4 |res|/sqrt(nDOFS) = 1.2499933218899869e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 4 iterations. 
+fsi_turek_FSI2: STEP =  18 
+fsi_turek_FSI2: TIME =  0.03600000000000002 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.344217376675406e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.806361225353452e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  19 
+fsi_turek_FSI2: TIME =  0.03800000000000002 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.2553944119503915e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.779524409073029e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  20 
+fsi_turek_FSI2: TIME =  0.04000000000000002 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.27509704222741e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.906975546539691e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  21 
+fsi_turek_FSI2: TIME =  0.04200000000000002 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.009136580730285e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.0835031728793857e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  22 
+fsi_turek_FSI2: TIME =  0.044000000000000025 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.705886041666453e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.6807054796016287e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  23 
+fsi_turek_FSI2: TIME =  0.04600000000000003 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.369595918642022e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.5886947558061333e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  24 
+fsi_turek_FSI2: TIME =  0.04800000000000003 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.585602190684188e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  25 
+fsi_turek_FSI2: TIME =  0.05000000000000003 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.820651896224073e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 9.488061642753574e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  26 
+fsi_turek_FSI2: TIME =  0.05200000000000003 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.1335215581579454e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.2271135669036606e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  27 
+fsi_turek_FSI2: TIME =  0.054000000000000034 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.6376671501024883e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.8562607188557325e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  28 
+fsi_turek_FSI2: TIME =  0.056000000000000036 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.141268757092895e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.788126587627161e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  29 
+fsi_turek_FSI2: TIME =  0.05800000000000004 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.4445662367833143e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.7671079278441642e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  30 
+fsi_turek_FSI2: TIME =  0.06000000000000004 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.717709899210728e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.984153451584893e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  31 
+fsi_turek_FSI2: TIME =  0.06200000000000004 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 5.383206524439297e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 8.305443172187042e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  32 
+fsi_turek_FSI2: TIME =  0.06400000000000004 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.4400861349408985e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.4100382229567742e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  33 
+fsi_turek_FSI2: TIME =  0.06600000000000004 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.3989119065162774e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.4335318848334653e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  34 
+fsi_turek_FSI2: TIME =  0.06800000000000005 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.039508515405164e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  35 
+fsi_turek_FSI2: TIME =  0.07000000000000005 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 5.228318392244381e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 9.471927816864472e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  36 
+fsi_turek_FSI2: TIME =  0.07200000000000005 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.1455126159032727e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.3662220524041346e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  37 
+fsi_turek_FSI2: TIME =  0.07400000000000005 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.5170405418555464e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.7250064921936994e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  38 
+fsi_turek_FSI2: TIME =  0.07600000000000005 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.71726314209509e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.3183322501778547e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  39 
+fsi_turek_FSI2: TIME =  0.07800000000000006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.700884194431637e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  40 
+fsi_turek_FSI2: TIME =  0.08000000000000006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.6438538087667569e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 5.806466238636992e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  41 
+fsi_turek_FSI2: TIME =  0.08200000000000006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.996115970374424e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.6235570783980662e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  42 
+fsi_turek_FSI2: TIME =  0.08400000000000006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.642473218658278e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.677057022956583e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  43 
+fsi_turek_FSI2: TIME =  0.08600000000000006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.916911157684365e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.404714568645149e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  44 
+fsi_turek_FSI2: TIME =  0.08800000000000006 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.1134375095521864e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.4016612860496512e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  45 
+fsi_turek_FSI2: TIME =  0.09000000000000007 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.0960150247425606e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.4032724860951684e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  46 
+fsi_turek_FSI2: TIME =  0.09200000000000007 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.354858400324319e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.7787708308764545e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  47 
+fsi_turek_FSI2: TIME =  0.09400000000000007 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.973487027890426e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 5.9530023673036625e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  48 
+fsi_turek_FSI2: TIME =  0.09600000000000007 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 5.695497317585227e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.1772939136663686e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  49 
+fsi_turek_FSI2: TIME =  0.09800000000000007 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 5.253365753882816e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 5.7994040529185133e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  50 
+fsi_turek_FSI2: TIME =  0.10000000000000007 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.761821537442764e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  51 
+fsi_turek_FSI2: TIME =  0.10200000000000008 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.2858240546798437e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 8.262162981896585e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  52 
+fsi_turek_FSI2: TIME =  0.10400000000000008 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.0812074075569516e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 5.827572171598042e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  53 
+fsi_turek_FSI2: TIME =  0.10600000000000008 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.165212799198252e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.4292571289354466e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  54 
+fsi_turek_FSI2: TIME =  0.10800000000000008 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.0804809242075423e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 5.08330869065071e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  55 
+fsi_turek_FSI2: TIME =  0.11000000000000008 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.823228312229958e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.4210704804237767e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  56 
+fsi_turek_FSI2: TIME =  0.11200000000000009 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.0058979428091094e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.1878817400623544e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  57 
+fsi_turek_FSI2: TIME =  0.11400000000000009 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.4071575792176568e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.4711893089449906e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  58 
+fsi_turek_FSI2: TIME =  0.11600000000000009 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.91060275989772e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 7.339267696738694e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  59 
+fsi_turek_FSI2: TIME =  0.11800000000000009 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.2939845065510836e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.115062310996618e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  60 
+fsi_turek_FSI2: TIME =  0.12000000000000009 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.724438912491392e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.729309556699151e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  61 
+fsi_turek_FSI2: TIME =  0.1220000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.6215491216916772e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.073151618345217e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  62 
+fsi_turek_FSI2: TIME =  0.1240000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.900001861905279e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.011869201934418e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  63 
+fsi_turek_FSI2: TIME =  0.12600000000000008 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.2502519117835967e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.7536876809964484e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  64 
+fsi_turek_FSI2: TIME =  0.12800000000000009 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.0408723225917121e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.21383715365118e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  65 
+fsi_turek_FSI2: TIME =  0.1300000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.488428557008383e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.254635133119019e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  66 
+fsi_turek_FSI2: TIME =  0.1320000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.2599795500256312e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.6940506131948235e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  67 
+fsi_turek_FSI2: TIME =  0.1340000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.702055971772081e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 5.993612321122084e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  68 
+fsi_turek_FSI2: TIME =  0.1360000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.3356926862341943e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.4619334738320737e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  69 
+fsi_turek_FSI2: TIME =  0.1380000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.120599864631769e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.897960200721912e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  70 
+fsi_turek_FSI2: TIME =  0.1400000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.982650129001106e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.957107965549958e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  71 
+fsi_turek_FSI2: TIME =  0.1420000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.944374386377865e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  72 
+fsi_turek_FSI2: TIME =  0.1440000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.399694924135521e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.0470122559936626e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 3.4965089178099896e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  73 
+fsi_turek_FSI2: TIME =  0.1460000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.604340301826013e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.305672114017492e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 1.186890415685797e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  74 
+fsi_turek_FSI2: TIME =  0.1480000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.579732539443102e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 7.788374053231849e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  75 
+fsi_turek_FSI2: TIME =  0.1500000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.4831676810803898e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.012332676489012e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  76 
+fsi_turek_FSI2: TIME =  0.1520000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.066227518300272e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 9.875590134416033e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  77 
+fsi_turek_FSI2: TIME =  0.1540000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.624238436296671e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 8.771192932732209e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  78 
+fsi_turek_FSI2: TIME =  0.1560000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.034870907270247e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.3057147257989734e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 1.0494820938566076e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  79 
+fsi_turek_FSI2: TIME =  0.1580000000000001 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.0898331148937096e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 5.082281344608644e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  80 
+fsi_turek_FSI2: TIME =  0.16000000000000011 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.096708143242817e-05 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.0178547927093907e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 2.2992341362177472e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  81 
+fsi_turek_FSI2: TIME =  0.16200000000000012 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.0155992964072895e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.00818365576565e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  82 
+fsi_turek_FSI2: TIME =  0.16400000000000012 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.604815792015326e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.1885994491223116e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  83 
+fsi_turek_FSI2: TIME =  0.16600000000000012 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.022261573989258e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.789492110398547e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  84 
+fsi_turek_FSI2: TIME =  0.16800000000000012 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.237939410683006e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.4788665023155324e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  85 
+fsi_turek_FSI2: TIME =  0.17000000000000012 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.510828326845346e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 7.86102051586978e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  86 
+fsi_turek_FSI2: TIME =  0.17200000000000013 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 5.6411005497317436e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.1877047405052156e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  87 
+fsi_turek_FSI2: TIME =  0.17400000000000013 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.2113686188927838e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.573897204278841e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  88 
+fsi_turek_FSI2: TIME =  0.17600000000000013 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.7751218280768427e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.9598097122200814e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  89 
+fsi_turek_FSI2: TIME =  0.17800000000000013 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 5.556925351121877e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 7.747429635985588e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  90 
+fsi_turek_FSI2: TIME =  0.18000000000000013 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 5.428388333584988e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.374308811870308e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  91 
+fsi_turek_FSI2: TIME =  0.18200000000000013 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.298100752722416e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.1060805448546374e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  92 
+fsi_turek_FSI2: TIME =  0.18400000000000014 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.1611858383656796e-06 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.1107736695800877e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  93 
+fsi_turek_FSI2: TIME =  0.18600000000000014 
+[WARNING] AMGCLSolver: The user-specified block size (1) does not match the detected block size (2). Continuing with the user-specified block size (1).
+Traceback (most recent call last):
+  File "/mnt/e/Research/RL-AMR/Smoothing/data/t1_prcg/run_fsi2.py", line 39, in <module>
+    simulation.Run()
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/analysis_stage.py", line 50, in Run
+    self.RunSolutionLoop()
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/analysis_stage.py", line 66, in RunSolutionLoop
+    _ = self.SolveSolutionStep()
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/analysis_stage.py", line 162, in SolveSolutionStep
+    return self._GetSolver().SolveSolutionStep()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/FSIApplication/partitioned_fsi_base_solver.py", line 214, in SolveSolutionStep
+    dis_residual_norm = self._ComputeInitialResidual()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/FSIApplication/partitioned_fsi_base_solver.py", line 766, in _ComputeInitialResidual
+    self._SolveFluid()
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/FSIApplication/partitioned_fsi_base_solver.py", line 692, in _SolveFluid
+    self.fluid_solver.SolveSolutionStep()
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/FluidDynamicsApplication/navier_stokes_monolithic_solver.py", line 335, in SolveSolutionStep
+    is_converged = super().SolveSolutionStep()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yjc/miniconda3/envs/pinn/lib/python3.12/site-packages/KratosMultiphysics/FluidDynamicsApplication/fluid_solver.py", line 136, in SolveSolutionStep
+    is_converged = self._GetSolutionStrategy().SolveSolutionStep()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Deregistering KratosMultiphysics
+Deregistering ConstitutiveLawsApplication
+Deregistering FSIApplication
+Deregistering FluidDynamicsApplication
+Deregistering StructuralMechanicsApplication
+Deregistering MeshMovingApplication
+Deregistering LinearSolversApplication
+Deregistering MappingApplication

@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 /docs/
 /mesquite/build-linux/
+/Smoothing/fsi_turek_FSI2/build-mesquite/

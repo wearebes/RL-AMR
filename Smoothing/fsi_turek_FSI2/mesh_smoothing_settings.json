@@ -1,0 +1,12 @@
+{
+    "enable_smoothing": false,
+    "quality_threshold": 0.5,
+    "max_selected_vertices": 100,
+    "inner_iteration_limit": 10,
+    "outer_iteration_limit": 1,
+    "regularization_delta": 2.5e-05,
+    "softmin_alpha": 50.0,
+    "library_path": "build-mesquite/libmesquite_smoothing.so",
+    "method": "prcg",
+    "model_path": "../MLP.pt"
+}
