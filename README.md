@@ -50,6 +50,7 @@ bash ../mesquite-2.3.0/configure \
 
 make SHELL=/bin/bash -j4 
 make SHELL=/bin/bash install
+```
 
 # Build the native FSI2 bridge on the target Linux machine, from the repository root:
 
@@ -62,7 +63,18 @@ cmake --build Smoothing/fsi_turek_FSI2/build-mesquite -j4
 3. Run the four formal FSI2 cases (20 s each), from the repository root:
 
 ```bash
-conda activate fsi  
+# Local Linux / WSL: selects the fsi Conda environment automatically.
 bash job.sh
 
+# Slurm HPC: uses the CPU allocation declared at the top of job.sh.
+sbatch job.sh
+
+# Optional: different environment, thread count, duration and output directory.
+CONDA_ENV=pinn OMP_NUM_THREADS=32 bash job.sh 0.05 Smoothing/data/new_smoke
+# If Conda is not on PATH, set CONDA_EXE=/path/to/conda.
+# Alternatively, PYTHON=/path/to/env/bin/python bash job.sh
 ```
+
+Local runs inherit `OMP_NUM_THREADS` if set; otherwise Kratos uses its runtime
+default. Slurm runs use `SLURM_CPUS_PER_TASK`. The four cases run sequentially.
+The target machine must already have the environment and native bridge installed.
