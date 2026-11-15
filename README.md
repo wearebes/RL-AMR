@@ -16,15 +16,15 @@ python -m evaluation.plot data/advection_IPN/history.csv
 python -m evaluation.evaluate bumps --config /path/to/evaluation.yaml
 ```
 ## Mesh smoothing/optimization
-1.may create the python env, may larger than version 3.12(3.13, 3.14)
+1. Create the Python environment:
 ```bash
-conda create -n fsi python==3.12
+conda create -n fsi python=3.12.0
 conda activate fsi
 ```
 2.for NN and Kratos-FSI2, mesquite environment packages
 ```bash
-pip install torch
-pip install numpy
+python -m pip install torch==2.14.0+cu130 --index-url https://download.pytorch.org/whl/cu130
+python -m pip install numpy==2.5.3
 
 
 python -m pip install --only-binary=:all: \
@@ -50,4 +50,19 @@ bash ../mesquite-2.3.0/configure \
 
 make SHELL=/bin/bash -j4 
 make SHELL=/bin/bash install
+
+# Build the native FSI2 bridge on the target Linux machine, from the repository root:
+
+```bash
+cmake -S Smoothing/fsi_turek_FSI2 -B Smoothing/fsi_turek_FSI2/build-mesquite \
+  -DMESQUITE_ROOT="$HOME/.local/mesquite/2.3.0"
+cmake --build Smoothing/fsi_turek_FSI2/build-mesquite -j4
+```
+
+3. Run the four formal FSI2 cases (20 s each), from the repository root:
+
+```bash
+conda activate fsi  
+bash job.sh
+
 ```
