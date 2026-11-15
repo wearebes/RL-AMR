@@ -284,6 +284,51 @@
         "structure_loads_process_list": []
     },
     "output_processes": {
+        "vtk_output": [
+            {
+                "python_module": "vtk_output_process",
+                "kratos_module": "KratosMultiphysics",
+                "process_name": "VtkOutputProcess",
+                "Parameters": {
+                    "model_part_name": "Structure",
+                    "output_control_type": "time",
+                    "output_interval": 0.01,
+                    "file_format": "binary",
+                    "output_path": "vtk_structure",
+                    "write_deformed_configuration": true,
+                    "write_ids": true,
+                    "nodal_solution_step_data_variables": [
+                        "DISPLACEMENT",
+                        "REACTION",
+                        "VELOCITY",
+                        "ACCELERATION"
+                    ],
+                    "gauss_point_variables_in_elements": [
+                        "VON_MISES_STRESS"
+                    ]
+                }
+            },
+            {
+                "python_module": "vtk_output_process",
+                "kratos_module": "KratosMultiphysics",
+                "process_name": "VtkOutputProcess",
+                "Parameters": {
+                    "model_part_name": "FluidModelPart.fluid_computational_model_part",
+                    "output_control_type": "time",
+                    "output_interval": 0.01,
+                    "file_format": "binary",
+                    "output_path": "vtk_fluid",
+                    "write_deformed_configuration": true,
+                    "write_ids": true,
+                    "nodal_solution_step_data_variables": [
+                        "VELOCITY",
+                        "PRESSURE",
+                        "MESH_DISPLACEMENT",
+                        "REACTION"
+                    ]
+                }
+            }
+        ],
         "gid_output": [
             {
                 "python_module": "gid_output_process",
@@ -348,7 +393,8 @@
                             "nodal_results": [
                                 "VELOCITY",
                                 "PRESSURE",
-                                "MESH_DISPLACEMENT"
+                                "MESH_DISPLACEMENT",
+                                "REACTION"
                             ],
                             "gauss_point_results": []
                         },
