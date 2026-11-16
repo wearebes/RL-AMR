@@ -1,0 +1,537 @@
+ |  /           |                  
+ ' /   __| _` | __|  _ \   __|    
+ . \  |   (   | |   (   |\__ \  
+_|\_\_|  \__,_|\__|\___/ ____/
+           Multi-Physics 10.4."4"--0-Release-x86_64
+           Compiled for GNU/Linux and Python3.12 with GCC-15.2
+Compiled with threading and MPI support. Threading support with OpenMP.
+Maximum number of threads: 32.
+Running without MPI.
+Importing    KratosFSIApplication 
+Initializing KratosFSIApplication...
+Importing    KratosFluidDynamicsApplication 
+Initializing KratosFluidDynamicsApplication...
+Importing    KratosStructuralMechanicsApplication 
+    KRATOS   ___|  |                   |                   |
+           \___ \  __|  __| |   |  __| __| |   |  __| _` | |
+                 | |   |    |   | (    |   |   | |   (   | |
+           _____/ \__|_|   \__,_|\___|\__|\__,_|_|  \__,_|_| MECHANICS
+Initializing KratosStructuralMechanicsApplication...
+Importing    KratosConstitutiveLawsApplication 
+Initializing KratosConstitutiveLawsApplication...
+Importing    KratosMeshMovingApplication 
+    KRATOS  __  __        _    __  __         _
+           |  \/  |___ __| |_ |  \/  |_____ _(_)_ _  __ _
+           | |\/| / -_|_-< ' \| |\/| / _ \ V / | ' \/ _` |
+           |_|  |_\___/__/_||_|_|  |_\___/\_/|_|_||_\__, |
+                                                    |___/
+Initializing KratosMeshMovingApplication...
+[WARNING] DataCommunicator: This function is deprecated, please retrieve the DataCommunicator through the ModelPart (or by name in special cases)
+Importing    LinearSolversApplication 
+    Kratos  _     _                       ____        _
+           | |   (_)_ __   ___  __ _ _ __/ ___|  ___ | |_   _____ _ __ ___
+           | |   | | '_ \ / _ \/ _` | '__\___ \ / _ \| \ \ / / _ \ '__/ __|
+           | |___| | | | |  __/ (_| | |   ___) | (_) | |\ V /  __/ |  \__ \
+           |_____|_|_| |_|\___|\__,_|_|  |____/ \___/|_| \_/ \___|_|  |___/
+Initializing KratosLinearSolversApplication...
+Importing    KratosMappingApplication 
+    KRATOS ______  ___                      _____
+           ___   |/  /_____ ___________________(_)_____________ _
+           __  /|_/ /_  __ `/__  __ \__  __ \_  /__  __ \_  __ `/
+           _  /  / / / /_/ /__  /_/ /_  /_/ /  / _  / / /  /_/ /
+           /_/  /_/  \__,_/ _  .___/_  .___//_/  /_/ /_/_\__, /
+                            /_/     /_/                 /____/
+Initializing KratosMappingApplication...
+[WARNING] ::[MechanicalSolver]:: : Settings contain no longer used setting, please remove it: "problem_domain_sub_model_part_list" 
+[WARNING] ::[MechanicalSolver]:: : Settings contain no longer used setting, please remove it: "processes_sub_model_part_list" 
+::[MechanicalSolver]:: : Construction finished 
+::[ImplicitMechanicalSolver]:: : Construction finished 
+PartitionedFSIBaseSolver: Structure solver construction finished. 
+NavierStokesMonolithicSolver: Construction of NavierStokesMonolithicSolver finished. 
+PartitionedFSIBaseSolver: Fluid solver construction finished. 
+::[MeshSolverBase]:: Construction finished: 
+::[MeshSolverLaplacian]:: Construction finished: 
+PartitionedFSIBaseSolver: ALE mesh solver construction finished. 
+PartitionedFSIBaseSolver: Partitioned FSI base solver construction finished. 
+::[MechanicalSolver]:: : Variables ADDED 
+::[ImplicitMechanicalSolver]:: : Variables ADDED 
+NavierStokesMonolithicSolver: Fluid solver variables added correctly. 
+::[MeshSolverBase]:: Variables ADDED.: 
+::[PythonSolver]::: Reading model part. 
+SingleImportModelPart: Reading model part from file: "/mnt/e/Research/RL-AMR/kratos_fsi2/Examples/fluid_structure_interaction/validation/fsi_turek_FSI2/source/fsi_turek_FSI2_Fluid".mdpa
+ModelPartIO:   [Reading Nodes    : 15577 nodes read]
+ModelPartIO:   [Reading Elements : 29926 elements read] [Type: Element2D3N]
+ModelPartIO:   [Reading Conditions : 1228 conditions read] [Type: WallCondition2D2N]
+ModelPartIO:   [Total Lines Read : 95572]
+SingleImportModelPart: Finished reading model part from mdpa file.
+ModelPart: -FluidModelPart- model part
+    Buffer Size : 1
+    Number of tables : 0
+    Number of sub model parts : 9
+    Current solution step index : 0
+    DOMAIN_SIZE : 2
+
+    Mesh 0 :
+        Number of Nodes       : 15577
+        Number of Properties  : 2
+        Number of Elements    : 29926
+        Number of Conditions  : 1228
+        Number of Geometries  : 0
+        Number of Constraints : 0
+
+    -ALEMeshDisplacementBC2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFixXY- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 84
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFreeX- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -AutomaticInlet2D_Inlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -FluidNoSlipInterface2D_FluidInterface- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 451
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 450
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 196
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_NoSlip- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 500
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Outlet2D_Outlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Parts_Fluid- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 15577
+            Number of Properties  : 0
+            Number of Elements    : 29926
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+ 
+::[PythonSolver]:: : Finished reading model part. 
+::[PythonSolver]::: Reading model part. 
+SingleImportModelPart: Reading model part from file: "/mnt/e/Research/RL-AMR/kratos_fsi2/Examples/fluid_structure_interaction/validation/fsi_turek_FSI2/source/fsi_turek_FSI2_Structural".mdpa
+ModelPartIO:   [Reading Nodes    : 2816 nodes read]
+ModelPartIO:   [Reading Elements : 2625 elements read] [Type: TotalLagrangianElement2D4N]
+ModelPartIO:   [Reading Conditions : 365 conditions read] [Type: LineCondition2D2N]
+ModelPartIO:   [Total Lines Read : 12035]
+SingleImportModelPart: Finished reading model part from mdpa file.
+ModelPart: -Structure- model part
+    Buffer Size : 1
+    Number of tables : 0
+    Number of sub model parts : 3
+    Current solution step index : 0
+    DOMAIN_SIZE : 2
+    OSS_SWITCH : 0
+    IS_RESTARTED : 0
+
+    Mesh 0 :
+        Number of Nodes       : 2816
+        Number of Properties  : 1
+        Number of Elements    : 2625
+        Number of Conditions  : 365
+        Number of Geometries  : 0
+        Number of Constraints : 0
+
+    -DISPLACEMENT_FixedDisplacement- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 16
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Parts_Structure- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 2816
+            Number of Properties  : 0
+            Number of Elements    : 2625
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -StructureInterface2D_StructureInterface- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 366
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 365
+            Number of Geometries  : 0
+            Number of Constraints : 0
+ 
+::[PythonSolver]:: : Finished reading model part. 
+::[PythonSolver]::: Reading model part. 
+::[PythonSolver]::: Using already imported model part - no reading necessary. 
+ModelPart: -FluidModelPart- model part
+    Buffer Size : 1
+    Number of tables : 0
+    Number of sub model parts : 9
+    Current solution step index : 0
+    DOMAIN_SIZE : 2
+
+    Mesh 0 :
+        Number of Nodes       : 15577
+        Number of Properties  : 2
+        Number of Elements    : 29926
+        Number of Conditions  : 1228
+        Number of Geometries  : 0
+        Number of Constraints : 0
+
+    -ALEMeshDisplacementBC2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFixXY- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 84
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -ALEMeshDisplacementBC2D_FluidALEMeshFreeX- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -AutomaticInlet2D_Inlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -FluidNoSlipInterface2D_FluidInterface- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 451
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 450
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_Cylinder- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 197
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 196
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -NoSlip2D_NoSlip- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 502
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 500
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Outlet2D_Outlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 42
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 41
+            Number of Geometries  : 0
+            Number of Constraints : 0
+    -Parts_Fluid- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Mesh 0 :
+            Number of Nodes       : 15577
+            Number of Properties  : 0
+            Number of Elements    : 29926
+            Number of Conditions  : 0
+            Number of Geometries  : 0
+            Number of Constraints : 0
+ 
+::[PythonSolver]:: : Finished reading model part. 
+Read materials: Started
+Read materials: Finished
+::[MechanicalSolver]:: : Constitutive law was successfully imported. 
+::[MechanicalSolver]::: ModelPart prepared for Solver. 
+Read materials: Started
+[WARNING] ReadMaterialsUtility: WARNING:: The properties ID: 1 is already defined in model part(s) [FluidModelPart.Parts_Fluid]. This will overwrite the existing values
+Read materials: Finished
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Construction from model part is deprecated. Please provide a 'Model' container and use full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'Parts_Fluid' found in 'volume_model_part_name'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'AutomaticInlet2D_Inlet' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'Outlet2D_Outlet' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'NoSlip2D_NoSlip' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'NoSlip2D_Cylinder' found in 'skin_parts'. Please provide full model part names. 
+[WARNING] DEPRECATION-Warning; CheckAndPrepareModelProcessFluid: Partial model part name 'FluidNoSlipInterface2D_FluidInterface' found in 'skin_parts'. Please provide full model part names. 
+FluidModelPart.Parts_Fluid
+TetrahedralMeshOrientationCheck: No inverted elements found
+Mesh orientation check found 720 inverted conditions.
+The IDs of the inverted conditions are:
+	975,	592,	967,	584,	971,	588,	596,	973,	590,	598,	969,	586,	977,	594,	974,	591,	966,	583,	970,	587 ...
+NavierStokesMonolithicSolver: Model reading finished. 
+PartitionedFSIBaseSolver: Fluid fluid_positive FSI coupling interface created 
+PartitionedFSIBaseSolver: Coupling strategy construction finished 
+PartitionedFSIBaseSolver: Structure FSI coupling interface created 
+::[MechanicalSolver]:: : DOF's ADDED 
+::[ImplicitMechanicalSolver]:: : DOF's ADDED 
+NavierStokesMonolithicSolver: Fluid solver DOFs added correctly. 
+::[MeshSolverBase]:: DOFs ADDED.: 
+[WARNING] DEPRECATION-Warning; MappingApplication: The "MapperFactory" was moved to the Core! (used for "CreateMapper") 
+::[MechanicalSolver]:: : Initializing ... 
+::[MechanicalSolver]:: No linear solver was specified, using fastest available solver: 
+Linear-Solver-Factory: Creating "sparse_lu" as fastest available direct solver 
+::[MechanicalSolver]:: : Finished initialization. 
+Linear-Solver-Factory: Constructing a regular (non-complex) linear-solver 
+NavierStokesMonolithicSolver: Solver initialization finished. 
+Linear-Solver-Factory: Constructing a regular (non-complex) linear-solver 
+FindNodalNeighboursProcess: please call separetely FindGlobalNodalNeighboursProcess
+        and FindGlobalNodalEntityNeighboursProcess<ModelPart::ElementsContainerType>.
+        The two calculations are currently independent,
+            hence memory savings can be achieved
+::[MeshSolverBase]:: Finished initialization.: 
+[WARNING] DEPRECATION-Warning; AnalysisStage: ModifyAfterSolverInitialize is deprecated. Please, use ModifyBeforeSolutionLoop instead. 
+fsi_turek_FSI2: Analysis -START- 
+fsi_turek_FSI2: STEP =  1 
+fsi_turek_FSI2: TIME =  0.002 
+[WARNING] ResidualBasedEliminationBuilderAndSolver: ATTENTION! setting the RHS to zero!
+[WARNING] ResidualBasedEliminationBuilderAndSolver: ATTENTION! setting the RHS to zero!
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.9543470322881e-09 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  2 
+fsi_turek_FSI2: TIME =  0.004 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.152899946817988e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  3 
+fsi_turek_FSI2: TIME =  0.006 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.004493934362336e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  4 
+fsi_turek_FSI2: TIME =  0.008 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.01576299845822e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.446215393304224e-05 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 2.738608832021216e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  5 
+fsi_turek_FSI2: TIME =  0.01 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.066129633095575e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.8080217023016384e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  6 
+fsi_turek_FSI2: TIME =  0.012 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.1263966811232948e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.488503150080132e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 1.265260367648438e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 4 |res|/sqrt(nDOFS) = 2.6704234396931885e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 4 iterations. 
+fsi_turek_FSI2: STEP =  7 
+fsi_turek_FSI2: TIME =  0.014 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.935396128632668e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  8 
+fsi_turek_FSI2: TIME =  0.016 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.0177514770331052e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.714408585629558e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  9 
+fsi_turek_FSI2: TIME =  0.018000000000000002 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.5702515027530704e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  10 
+fsi_turek_FSI2: TIME =  0.020000000000000004 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.0744946282572157e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.8269741090556704e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  11 
+fsi_turek_FSI2: TIME =  0.022000000000000006 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 4.278658701682719e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.6975620681887195e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  12 
+fsi_turek_FSI2: TIME =  0.024000000000000007 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.412134863096217e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.79674771328865e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  13 
+fsi_turek_FSI2: TIME =  0.02600000000000001 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.359151479236721e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 8.060515352244987e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  14 
+fsi_turek_FSI2: TIME =  0.02800000000000001 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 9.877718971665143e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 6.701019893898843e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  15 
+fsi_turek_FSI2: TIME =  0.030000000000000013 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.734588119634579e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.6207447909939483e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  16 
+fsi_turek_FSI2: TIME =  0.032000000000000015 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 1.5903546544273102e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.0609057582665803e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 2.862067016737231e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 3 iterations. 
+fsi_turek_FSI2: STEP =  17 
+fsi_turek_FSI2: TIME =  0.034000000000000016 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.32160662439152e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.435021229606371e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 3 |res|/sqrt(nDOFS) = 1.2809096000555221e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 4 |res|/sqrt(nDOFS) = 1.4055423535209052e-08 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 4 iterations. 
+fsi_turek_FSI2: STEP =  18 
+fsi_turek_FSI2: TIME =  0.03600000000000002 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.4975500472404684e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.617879809299608e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  19 
+fsi_turek_FSI2: TIME =  0.03800000000000002 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 2.62986067239282e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.963849804426362e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  20 
+fsi_turek_FSI2: TIME =  0.04000000000000002 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.344484883021595e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 4.040321983617035e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  21 
+fsi_turek_FSI2: TIME =  0.04200000000000002 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 6.141741389937552e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 2.3307625533366432e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  22 
+fsi_turek_FSI2: TIME =  0.044000000000000025 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 7.087733090651053e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 1.5994715342217003e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  23 
+fsi_turek_FSI2: TIME =  0.04600000000000003 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.646110051054557e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 3.6301540914642494e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: STEP =  24 
+fsi_turek_FSI2: TIME =  0.04800000000000003 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 8.522034392630936e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 1 iterations. 
+fsi_turek_FSI2: STEP =  25 
+fsi_turek_FSI2: TIME =  0.05000000000000003 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 1 |res|/sqrt(nDOFS) = 3.5073210704353113e-06 
+PartitionedFSIBaseSolver: FSI non-linear iteration = 2 |res|/sqrt(nDOFS) = 8.396687484989691e-07 
+PartitionedFSIBaseSolver: FSI non-linear iteration convergence achieved in 2 iterations. 
+fsi_turek_FSI2: Analysis -END-  
+Deregistering KratosMultiphysics
+Deregistering ConstitutiveLawsApplication
+Deregistering FSIApplication
+Deregistering FluidDynamicsApplication
+Deregistering StructuralMechanicsApplication
+Deregistering MeshMovingApplication
+Deregistering LinearSolversApplication
+Deregistering MappingApplication

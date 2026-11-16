@@ -1,4 +1,7 @@
 /tem/
 __pycache__/
 *.pyc
+.DS_Store
+/mesquite/build-linux/
+/Smoothing/fsi_turek_FSI2/build-mesquite/
 /docs/
