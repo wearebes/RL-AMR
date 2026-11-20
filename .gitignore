@@ -2,6 +2,7 @@
 __pycache__/
 *.pyc
 .DS_Store
+/build/
 /mesquite/build-linux/
 /Smoothing/fsi_turek_FSI2/build-mesquite/
 /docs/
