@@ -52,7 +52,7 @@ void Mesquite::SphericalDomain::snap_to(Mesh::VertexHandle /*entity_handle*/,
   coordinate *= mRadius / len;
     // If was at center, return arbitrary position on sphere
     // (all possitions are equally close)
-  if (!finite(coordinate.x()))
+  if (!std::isfinite(coordinate.x()))
     coordinate.set( mRadius, 0.0, 0.0 );
     // Get position from vector
   coordinate += mCenter;
@@ -68,7 +68,7 @@ void Mesquite::SphericalDomain::vertex_normal_at(Mesh::VertexHandle /*entity_han
   coordinate /= length;
     // if input position was at center, choose same position
     // on sphere as snap_to.
-  if (!finite(coordinate.x()))
+  if (!std::isfinite(coordinate.x()))
     coordinate.set( 1.0, 0.0, 0.0 );
 }
 void Mesquite::SphericalDomain::element_normal_at(Mesh::ElementHandle h,
@@ -95,7 +95,7 @@ void Mesquite::SphericalDomain::closest_point( Mesquite::Mesh::VertexHandle ,
 {
   normal = position - mCenter;
   normal.normalize();
-  if (!finite(normal.x()))
+  if (!std::isfinite(normal.x()))
     normal.set( 1.0, 0.0, 0.0 );
   closest = mCenter + mRadius * normal;
 }
